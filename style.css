@@ -101,6 +101,7 @@ header img{
 }
 
 #bodyContent button {
+    position: relative;
     margin-top: 10px;
     padding: 10px;
     width: 100px;
@@ -108,6 +109,10 @@ header img{
     cursor: pointer;
     border-radius: 5px;
     border: 0;
+}
+
+#bodyContent button:hover {
+    animation: shake 1s ease infinite;
 }
 
 
@@ -133,34 +138,38 @@ main{
     align-content: center;
     height: 500px;
     justify-content: space-evenly;
-    border-bottom: 1px dashed rgba(0, 0, 0, 0.218);
+    border-bottom: 1px dotted rgba(0, 0, 0, 0.218);
 }
 
-
 #feature .fe-box {
-    position: relative; /* Add this to establish a positioning context */
+    display: flex;
+    flex-direction: column;
     margin: 5px;
     width: 280px;
+    align-items: center;
     background-color: rgba(255, 255, 255, 0.74);
     border: 2px solid #cce7d0;
     border-radius: 10px;
     box-shadow: 20px 20px 34px rgba(0, 0, 0, 0.06);
 }
 
-#feature .fe-box h4 {
+#feature .fe-box:hover {
+    border-color: #088178;
+    transform: scale(1.03);
+}
 
-    position: absolute; /* Position the h4 element absolutely */
-    bottom: 10px; /* Adjust this value to position it as desired */
-    left: 50%; /* Center the h4 element horizontally */
-    transform: translateX(-50%); /* Center it perfectly */
-    display: inline-block;
+#feature .fe-box h4 {
+    display: flex;
+    align-items: center;
     padding: 9px 8px 6px 8px;
+    margin-bottom: 4px;
     line-height: 1;
     border-radius: 4px;
     background-color: #e7cbe3;
     min-height: 50px;
     text-align: center;
     pointer-events: none;
+    
 }
 
 #feature .fe-box:nth-child(2) h4 {
@@ -175,9 +184,7 @@ main{
     background-color: #8ab6fc;
 }
 
-#feature .fe-box:hover {
-    border-color: #088178;
-}
+
 
 /* Product Section */
 #product {
@@ -188,11 +195,11 @@ main{
 
 #product .product-text{
     position: relative;
+    margin-top: 50px;
     text-align: center;
     pointer-events: none;
-    animation-name: TextMovement;
-    animation-duration: 5s;
-    animation-iteration-count: infinite;
+    animation: moveText 3s ease infinite;
+    
 }
 
 #product .pr-boxes{
@@ -203,19 +210,22 @@ main{
 }
 
 #product .pr-box {
-    position: relative; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
-    height:470px;
+    height:400px;
     width: 300px;
     margin-top: 90px;
     margin-bottom: 90px;
-    border: 1px solid rgba(0, 0, 0, 0.06);
-    border-radius: 3px;
-    box-shadow: 30px 30px 44px rgba(0, 0, 0, 0.10); 
+    border-radius: 5px;
+    border: 2px solid rgba(0, 0, 0, 0.06);
+    box-shadow: 0px 0px 40px 10px  rgba(0, 0, 0, 0.10); 
 }
 
 #product .pr-box img {
-    box-shadow: 10px 10px 70px inset rgba(36, 25, 3, 0.159);
+    width: 75%;
+    box-shadow: 0px 0px 30px 20px inset rgba(36, 25, 3, 0.159);
     border-radius: 100px;
 }
 
@@ -224,16 +234,13 @@ main{
   }
 
 #product .pr-box h6 {
+    width: 100%;
     margin: 10px;
-    color: rgba(24, 26, 27, 0.63);
+    color: rgb(0, 0, 0);
     font-size: medium;
     font-weight: bolder;
     pointer-events: none;
     
-}
-
-#product .pr-box .star {
-    color: rgb(243, 181, 25);
 }
 
 #product .pr-box .pr-cart {
@@ -264,11 +271,53 @@ footer li {
     
 }
 /* Animations */
-@keyframes TextMovement {
-    0%, 20%,40%{top: 0px; }
-    50%,60%, 80% {top: 50px;}
-    100% {top: 0px;}
-}
+@keyframes moveText {
+    0% {
+      top: 0;
+      opacity: 1;
+      text-shadow: none;
+    }
+    25% {
+      top: 25px;
+      opacity: 0.75;
+      text-shadow: -2px -2px 3px rgba(0, 0, 0, 0.3); /* Add a shadow effect */
+    }
+    50% {
+      top: 50px;
+      opacity: 1;
+      text-shadow: none; 
+    } 
+    75% {
+      top: 25px;
+      opacity: 0.75;
+      text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.3); /* Add a shadow effect */
+    }
+    100% {
+      top: 0;
+      opacity: 1;
+      text-shadow: none;
+    }
+  }
+
+@keyframes shake {
+    0%, 100% {
+        transform: scale(1);
+      }
+      5%, 10%, 15%, 20%, 25% {
+        transform:  scale(1.1);
+      }
+      30%, 35%, 40%, 45%, 50% {
+        transform: scale(1.1);
+      }
+      55%, 60%, 65%, 70%, 75% {
+        transform:  scale(1.1);
+      }
+      80%, 85%, 90%, 95% {
+        transform: scale(1.0);
+      }
+    }
+
+
 
 /* Styles for medium-sized screens */
 @media screen and (max-width: 768px) {
@@ -315,16 +364,14 @@ footer li {
         flex-wrap: wrap;
         transition: ease all .5s;
     }
-   
+    
     #feature .fe-box{
-        width: 150px;
+        width: 125px;
         
     }
 
-    #feature .fe-box .feature-text h4{
-        font-size: 10px;
-        min-height: 30px;
-        
+    #feature .fe-box  h4{
+        font-size: 15px;
     }
 
     #product .product-text h1{
@@ -334,7 +381,7 @@ footer li {
     
     #product .pr-box{
         width: 200px;
-        height: 370px;
+        height: 300px;
         transition: ease all .5s;
     }
 
